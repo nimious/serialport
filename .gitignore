@@ -1,1 +1,5 @@
 nimcache/
+.directory
+*.dll
+*.exe
+*.sublime*
