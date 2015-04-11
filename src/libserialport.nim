@@ -25,6 +25,7 @@ type
     errMem = - 3, ## A memory allocation failed while executing the operation.
     errFail = - 2, ## A system error occurred while executing the operation.
     errArg = - 1, ## Invalid arguments were passed to the function.
+    ok = 0 ## Operation completed successfully.
 
 
   SpMode* {.pure.} = enum ## \
@@ -126,6 +127,9 @@ type
   SpPort* = object
     ## An opaque structure representing a serial port.
 
+  SpPortList* {.unchecked.} = array[10_000, ptr SpPort]
+    ## A list of pointers to serial port structures.
+
   SpPortConfig* = object
     ## An opaque structure representing the configuration for a serial port.
 
@@ -167,7 +171,7 @@ proc spFreePort*(port: ptr SpPort)
   ##   Pointer to the port structure to free
 
 
-proc spListPorts*(listPtr: ptr ptr ptr SpPort): SpReturn
+proc spListPorts*(listPtr: ptr ptr SpPortList): SpReturn
   {.cdecl, dynlib: dllname, importc: "sp_list_ports".}
   ## List the serial ports available on the system.
   ##
@@ -207,7 +211,7 @@ proc spCopyPort*(port: ptr SpPort; copyPtr: ptr ptr SpPort): SpReturn
   ## to `nil`. Otherwise, it will be set to point to the newly allocated copy.
 
 
-proc spFreePortList*(ports: ptr ptr SpPort)
+proc spFreePortList*(ports: ptr SpPortList)
   {.cdecl, dynlib: dllname, importc: "sp_free_port_list".}
   ## Free a port list obtained from `spListPorts <#spListPorts>`_.
   ##
@@ -396,7 +400,7 @@ proc spGetPortHandle*(port: ptr SpPort; resultPtr: pointer): SpReturn
   ## Be careful.
 
 
-# Setting port parameters
+# Configuration
 
 proc spNewConfig*(config_ptr: ptr ptr SpPortConfig): SpReturn
   {.cdecl, dynlib: dllname, importc: "sp_new_config".}
