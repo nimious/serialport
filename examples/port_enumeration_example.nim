@@ -31,8 +31,37 @@ of SpReturn.ok:
     if port == nil:
       break
     echo "Details for port #", i
-    echo "  Name: ", spGetPortName(port)
-    echo "  Description: ", spGetPortDescription(port)
+    let name = spGetPortName(port)
+    if name != nil:
+      echo "  Name: ", name
+    let description = spGetPortDescription(port)
+    if description != nil:
+      echo "  Description: ", description
+    let transport = spGetPortTransport(port)
+    case transport
+    of SpTransport.native:
+      echo "  Transport: native"
+    of SpTransport.usb:
+      echo "  Transport: usb"
+      var bus, address: cint
+      if spGetPortUsbBusAddress(port, addr bus, addr address) == SpReturn.ok:
+        echo "    Bus: ", bus, ", Address: ", address
+      let manufacturer = spGetPortUsbManufacturer(port)
+      if manufacturer != nil:
+        echo "    Manufacturer: ", manufacturer
+      let product = spGetPortUsbProduct(port)
+      if product != nil:
+        echo "    Product: ", product
+      let serial = spGetPortUsbSerial(port)
+      if serial != nil:
+        echo "    Serial: ", spGetPortUsbSerial(port)
+    of SpTransport.bluetooth:
+      echo "  Transport: bluetooth"
+      let address = spGetPortBluetoothAddress(port)
+      if address != nil:
+        echo "    Address: ", address
+    else:
+      echo "  Transport: unknown (", ord(transport), ")"
   spFreePortList(ports)
 else:
-  echo "Failed to enumerate ports: Unknown error code ", ord(listPortsResult)
+  echo "Failed to enumerate ports: Unknown error (", ord(listPortsResult), ")"

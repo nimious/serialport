@@ -14,11 +14,11 @@ cross-platform library for communication with serial ports.
 
 ## Supported Platforms
 
-io-serialport currently supports the following platforms:
+The following platforms have been built and tested with **libserialport 0.2.0**:
 
 - ~~Android~~
 - ~~FreeBSD~~
-- ~~Linux~~
+- Linux
 - ~~OpenBSD~~
 - ~~MacOS X~~
 - ~~Windows~~
@@ -36,7 +36,13 @@ TODO
 
 ### Linux
 
-TODO
+Your package manager may already have the latest version of *libserialport*
+available for installation. Please check the libserialport download page for
+details. If the latest library is not available, follow the instructions on the
+libserialport wiki to build and install it from source.
+
+Note that on some Linux distributions you may have to copy the generated
+*libserialport.so* file into the appropriate location, i.e. to */usr/lib*.
 
 ### OpenBSD
 

@@ -1247,7 +1247,7 @@ const ## Library/libtool version (can be used for conditional compilation).
     ## ("current:revision:age") as string.
 
 
-proc sp_get_major_package_version*(): cint
+proc spGetMajorPackageVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_major_package_version".}
   ## Get the major libserialport package version number.
   ##
@@ -1255,7 +1255,7 @@ proc sp_get_major_package_version*(): cint
   ##   The major package version number
 
 
-proc sp_get_minor_package_version*(): cint
+proc spGetMinorPackageVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_minor_package_version".}
   ## Get the minor libserialport package version number.
   ##
@@ -1263,7 +1263,7 @@ proc sp_get_minor_package_version*(): cint
   ##   The minor package version number
 
 
-proc sp_get_micro_package_version*(): cint
+proc spGetMicroPackageVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_micro_package_version".}
   ## Get the micro libserialport package version number.
   ##
@@ -1271,7 +1271,7 @@ proc sp_get_micro_package_version*(): cint
   ##   The micro package version number
 
 
-proc sp_get_package_version_string*(): cstring
+proc spGetPackageVersionString*(): cstring
   {.cdecl, dynlib: dllname, importc: "sp_get_package_version_string".}
   ## Get the libserialport package version number as a string.
   ##
@@ -1280,14 +1280,14 @@ proc sp_get_package_version_string*(): cstring
   ##
   ## The returned string is static and thus should NOT be free'd by the caller.
 
-proc sp_get_current_lib_version*(): cint
+proc spGetCurrentLibVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_current_lib_version".}
   ## Get the "current" part of the libserialport library version number.
   ##
   ## result
   ##   The "current" library version number
 
-proc sp_get_revision_lib_version*(): cint
+proc spGetRevisionLibVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_revision_lib_version".}
   ## Get the "revision" part of the libserialport library version number.
   ##
@@ -1295,14 +1295,14 @@ proc sp_get_revision_lib_version*(): cint
   ##   The "revision" library version number
 
 
-proc sp_get_age_lib_version*(): cint
+proc spGetAgeLibVersion*(): cint
   {.cdecl, dynlib: dllname, importc: "sp_get_age_lib_version".}
   ## Get the "age" part of the libserialport library version number.
   ##
   ## result
   ##   The "age" library version number
 
-proc sp_get_lib_version_string*(): cstring
+proc spGetLibVersionString*(): cstring
   {.cdecl, dynlib: dllname, importc: "sp_get_lib_version_string".}
   ## Get the libserialport library version number as a string.
   ##
