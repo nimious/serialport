@@ -153,7 +153,7 @@ proc spGetPortByName*(portname: cstring; portPtr: ptr ptr SpPort): SpReturn
   ##   - `SpReturn.ok <#SpReturn>`_ upon success
   ##   - a negative error code otherwise
   ##
-  ## The user should allocate a variable of type"struct SpPort *" and pass a
+  ## The user should allocate a variable of `SpPort <#SpPort>`_ and pass a
   ## pointer to this to receive the result.
   ##
   ## The result should be freed after use by calling `spFreePort <#spFreePort>`_.
