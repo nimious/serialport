@@ -18,38 +18,42 @@ else:
 
 
 type
-  SpReturn* {.pure.} = enum ## \
+  SpReturn* {.pure.} = enum
     ## Return values.
-    errSup = - 4, ## The requested operation is not supported by this system or
-      ## device.
-    errMem = - 3, ## A memory allocation failed while executing the operation.
-    errFail = - 2, ## A system error occurred while executing the operation.
-    errArg = - 1, ## Invalid arguments were passed to the function.
-    ok = 0 ## Operation completed successfully.
+    errSup = - 4,
+      ## The requested operation is not supported by this system or device.
+    errMem = - 3,
+      ## A memory allocation failed while executing the operation.
+    errFail = - 2,
+      ## A system error occurred while executing the operation.
+    errArg = - 1,
+      ## Invalid arguments were passed to the function.
+    ok = 0
+      ## Operation completed successfully.
 
 
-  SpMode* {.pure.} = enum ## \
+  SpMode* {.pure.} = enum
     ## Port access modes.
     read = 1, ## Open port for read access.
     write = 2, ## Open port for write access.
     readWrite = 3 ## Open port for read and write access.
 
 
-  SpEvent* {.pure.} = enum ## \
+  SpEvent* {.pure.} = enum
     ## Port events.
     rxReady = 1, ## Data received and ready to read.
     txReady = 2, ## Ready to transmit new data.
     error = 4 ## Error occurred.
 
 
-  SpBuffer* {.pure.} = enum ## \
+  SpBuffer* {.pure.} = enum
     ## Buffer selection.
     input = 1, ## Input buffer.
     output = 2, ## Output buffer.
     both = 3 ## Both buffers.
 
 
-  SpParity* {.pure.} = enum ## \
+  SpParity* {.pure.} = enum
     ## Parity settings.
     invalid = - 1, ## Special value to indicate setting should be left alone.
     none = 0, ## No parity.
@@ -59,7 +63,7 @@ type
     space = 4 ## Space parity.
 
 
-  SpRts* {.pure.} = enum ## \
+  SpRts* {.pure.} = enum
     ## RTS pin behaviour.
     invalid = - 1, ## Special value to indicate setting should be left alone.
     off = 0, ## RTS off.
@@ -67,40 +71,38 @@ type
     flowControl = 2 ## RTS used for flow control.
 
 
-  SpCts* {.pure.} = enum ## \
+  SpCts* {.pure.} = enum
     ## CTS pin behaviour.
     invalid = - 1, ## Special value to indicate setting should be left alone.
     ignore = 0, ## CTS ignored.
     flowControl = 1 ## CTS used for flow control.
 
 
-  SpDtr* {.pure.} = enum ## \
+  SpDtr* {.pure.} = enum
     ## DTR pin behaviour.
-    invalid = - 1, ## Special value to indicate setting should be left
-      ## alone.
+    invalid = - 1, ## Special value to indicate setting should be left alone.
     off = 0, ## DTR off.
     on = 1, ## DTR on.
     flowControl = 2## DTR used for flow control.
 
 
-  SpDsr* {.pure.} = enum ## \
+  SpDsr* {.pure.} = enum
     ## DSR pin behaviour.
     invalid = - 1, ## Special value to indicate setting should be left alone.
     ignore = 0, ## DSR ignored.
     flowControl = 1 ## DSR used for flow control.
 
 
-  SpXonXoff* {.pure.} = enum ## \
+  SpXonXoff* {.pure.} = enum
     ## XON/XOFF flow control behaviour.
-    invalid = - 1, ## Special value to indicate setting should be
-      ## left alone.
+    invalid = - 1, ## Special value to indicate setting should be left alone.
     disabled = 0, ## XON/XOFF disabled.
     inputOnly = 1, ## XON/XOFF enabled for input only.
     outputOnly = 2, ## XON/XOFF enabled for output only.
     inputOutput = 3 ## XON/XOFF enabled for input and output.
 
 
-  SpFlowControl* {.pure.} = enum ## \
+  SpFlowControl* {.pure.} = enum
     ## Standard flow control combinations.
     none = 0, ## No flow control.
     xonXoff = 1, ## Software flow control using XON/XOFF characters.
@@ -108,7 +110,7 @@ type
     dtrDsr = 3 ## Hardware flow control using DTR/DSR signals.
 
 
-  SpSignal* {.pure.} = enum ## \
+  SpSignal* {.pure.} = enum
     ## Input signals.
     cts = 1, ## Clear to send.
     dsr = 2, ## Data set ready.
@@ -116,7 +118,7 @@ type
     ri = 8 ## Ring indicator.
 
 
-  SpTransport* {.pure.} = enum ## \
+  SpTransport* {.pure.} = enum
     ## Transport types.
     native, ## Native platform serial port.
     usb, ## USB serial port adapter.
@@ -135,10 +137,12 @@ type
 
   SpEventSet* = object
     ## A set of handles to wait on for events.
-    handles*: pointer ## Array of OS-specific handles.
-    masks*: ptr SpEvent ## Array of bitmasks indicating which events apply for
-      ## each handle.
-    count*: cuint ## Number of handles.
+    handles*: pointer
+      ## Array of OS-specific handles.
+    masks*: ptr SpEvent
+      ## Array of bitmasks indicating which events apply for each handle.
+    count*: cuint
+      ## Number of handles.
 
 
 # Port enumeration
@@ -1229,22 +1233,25 @@ proc spDefaultDebugHandler*(format: cstring)
 # compile/preprocessor time using the respective macros.
 
 const ## Package version (can be used for conditional compilation).
-  spPackageVersionMajor* = 0 ## The libserialport package 'major' version
-    ## number.
-  spPackageVersionMinor* = 2 ## The libserialport package 'minor' version
-    ## number.
-  spPackageVersionMicro* = 0 ## The libserialport package 'micro' version
-    ## number.
-  spPackageVersionString* = "0.2.0" ## The libserialport package version
-    ## ("major.minor.micro") as string.
+  spPackageVersionMajor* = 0
+    ## The libserialport package 'major' version number.
+  spPackageVersionMinor* = 2
+    ## The libserialport package 'minor' version number.
+  spPackageVersionMicro* = 0
+    ## The libserialport package 'micro' version number.
+  spPackageVersionString* = "0.2.0"
+    ## The libserialport package version ("major.minor.micro") as string.
 
 
 const ## Library/libtool version (can be used for conditional compilation).
-  spLibVersionCurrent* = 0 ## The libserialport libtool 'current' version number.
-  spLibVersionRevision* = 0 ## The libserialport libtool 'revision' version number.
-  spLibVersionAge* = 0 ## The libserialport libtool 'age' version number.
-  spLibVersionString* = "0.0.0" ## The libserialport libtool version
-    ## ("current:revision:age") as string.
+  spLibVersionCurrent* = 0
+    ## The libserialport libtool 'current' version number.
+  spLibVersionRevision* = 0
+    ## The libserialport libtool 'revision' version number.
+  spLibVersionAge* = 0
+    ## The libserialport libtool 'age' version number.
+  spLibVersionString* = "0.0.0"
+    ## The libserialport libtool version ("current:revision:age") as string.
 
 
 proc spGetMajorPackageVersion*(): cint
