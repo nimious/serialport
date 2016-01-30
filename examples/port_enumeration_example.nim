@@ -1,4 +1,4 @@
-## *io-serialport* - Nim bindings for libserialport, the cross-platform serial
+## *serialport* - Nim bindings for libserialport, the cross-platform serial
 ## communication library.
 ##
 ## This file is part of the `Nim I/O <http://nimio.us>`_ package collection.
